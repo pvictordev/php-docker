@@ -4,9 +4,6 @@ FROM php:8.2-cli
 # Set the working directory in the container
 WORKDIR /var/www/html
 
-# Copy composer files first to leverage Docker cache for dependencies
-COPY composer.json composer.lock ./
-
 # Install Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php --install-dir=/usr/local/bin --filename=composer && \
