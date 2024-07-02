@@ -4,8 +4,8 @@ FROM php:8.2-cli
 # Set the working directory in the container
 WORKDIR /var/www/html
 
-# Copy the current directory contents into the container at /var/www/html
-COPY . /var/www/html
+# Copy composer files first to leverage Docker cache for dependencies
+COPY composer.json composer.lock ./
 
 # Install Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
@@ -13,7 +13,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     php -r "unlink('composer-setup.php');"
 
 # Install PHP dependencies
-RUN composer install
+RUN composer install --no-dev --optimize-autoloader
+
+# Copy the current directory contents into the container at /var/www/html
+COPY . .
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
