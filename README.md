@@ -1,8 +1,7 @@
 # PHP & Docker
+An example how to dockerize a php application and host it on an AWS EC2 instance. 
 
-## An example how to dockerize a php application and host it on an AWS EC2 instance. 
-
-### Remarks
+## Remarks
 This is a basic php app docker container. To run it locally, run cmd: ``docker-compose up --build`` from the project directory in terminal.
 
 When the container is running, it will be attached to port 80 of the local machine, go to: http://localhost:80 to view the site.
